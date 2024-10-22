@@ -42,6 +42,14 @@
                 <a href="{{ route('companies.show', 1) }}"
                     class="nav-link"><i class="fas fa-building"></i> <span>Company</span></a>
             </li>
+            <li class="nav-item {{ $type_menu === 'absensi' ? 'active' : '' }}">
+                <a href="{{ route('attendances.index') }}"
+                    class="nav-link"><i class="fas fa-clock"></i> <span>Attendances</span></a>
+            </li>
+            <li class="nav-item {{ $type_menu === 'permission' ? 'active' : '' }}">
+                <a href="{{ route('permissions.index') }}"
+                    class="nav-link"><i class="fas fa-clipboard-user"></i> <span>Permission</span></a>
+            </li>
         </ul>
     </aside>
 </div>

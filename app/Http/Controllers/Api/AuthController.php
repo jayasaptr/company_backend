@@ -53,4 +53,21 @@ class AuthController extends Controller
 
         return response(['message' => 'Logout Success'], 200);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'face_embeding' => 'required',
+        ]);
+
+        $user = $request->user();
+        $face_embeding = $request->face_embeding;
+        $user->face_embeding = $face_embeding;
+        $user->save();
+
+        return response([
+            'message' => 'Profile updated',
+            'user' => $user,
+        ], 200);
+    }
 }
