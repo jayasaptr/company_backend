@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jaya Admin',
             'email' => 'jaya@gmail.com',
             'password' => Hash::make('password')
+        ]);
+
+        Company::create([
+            'name' => 'Yayasan Hasnur Centre',
+            'email' => 'yhc@hasnurcentre.org',
+            'address' => 'JL. Jalan-Jalan',
+            'latitude' => '-123.4567',
+            'longitude' => '123.4567',
+            'radius' => '0.5',
+            'time_in' => '08:00',
+            'time_out' => '17:00'
         ]);
     }
 }
