@@ -70,4 +70,43 @@ class AuthController extends Controller
             'user' => $user,
         ], 200);
     }
+
+    public function isValidFace(Request $request)
+    {
+        $emb = $request->input('emb');
+
+        $users = User::whereNotNull('face_embeding')->get();
+        foreach ($users as $user) {
+            $faceEmbedding = array_map('doubleval', explode(',', $user->face_embeding));
+
+            $distance = $this->findNearest($emb, $faceEmbedding);
+            
+            if ($distance < 1.0) {
+                return response()->json(['valid' => true, 'user' => $user]);
+            }
+        }
+
+        return response()->json(['valid' => false]);
+    }
+
+    private function findNearest(array $emb, array $authFaceEmbedding)
+    {
+        $distance = 0;
+        $count = min(count($emb), count($authFaceEmbedding));
+        for ($i = 0; $i < $count; $i++) {
+            $diff = $emb[$i] - $authFaceEmbedding[$i];
+            $distance += $diff * $diff;
+        }
+        return sqrt($distance);
+    }
+}
+
+class PairEmbedding
+{
+    public $distance;
+
+    public function __construct($distance)
+    {
+        $this->distance = $distance;
+    }
 }

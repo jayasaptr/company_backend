@@ -26,4 +26,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/api-permissions', App\Http\Controllers\Api\PermissionController::class);
 
     Route::apiResource('/api-notes', App\Http\Controllers\Api\NoteController::class);
+
+    Route::post('/is-valid-face-user', [App\Http\Controllers\Api\AuthController::class, 'isValidFace']);
+
+    Route::post('/generate-dummy-users', [App\Http\Controllers\Api\AuthController::class, 'generateDummyUsers']);
 });
